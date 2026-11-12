@@ -1,0 +1,28 @@
+<launch>
+  <arg name="foxglove" default="true" />
+  <arg name="foxglove_port" default="8765" />
+  <arg name="republish_image" default="true" />
+  <arg name="use_sim_time" default="true" />
+  <arg name="input_reliability" default="best_effort" />
+  <arg name="input_statistics" default="false" />
+  <arg name="outputfilepath" default="$(env FAST_LIVO_OUTPUT_DIR /results)" />
+  <arg name="config" default="$(find-pkg-share fast_livo_ros2)/config/HH.yaml" />
+  <node pkg="fast_livo_ros2" exec="fastlivo_mapping" name="laserMapping" output="screen"
+        sigterm_timeout="600.0" sigkill_timeout="30.0">
+    <param from="$(var config)" />
+    <param name="laserMapping.outputfilepath" value="$(var outputfilepath)" />
+    <param name="use_sim_time" value="$(var use_sim_time)" />
+    <param name="adapter.input_reliability" value="$(var input_reliability)" />
+    <param name="adapter.input_statistics" value="$(var input_statistics)" />
+  </node>
+  <node if="$(var foxglove)" pkg="foxglove_bridge" exec="foxglove_bridge" name="foxglove_bridge" output="screen">
+    <param name="address" value="0.0.0.0" />
+    <param name="port" value="$(var foxglove_port)" />
+  </node>
+  <node if="$(var republish_image)" pkg="image_transport" exec="republish" name="republish"
+        args="compressed raw" output="screen">
+    <remap from="in/compressed" to="/left_camera/image/compressed" />
+    <remap from="out" to="/left_camera/image" />
+    <param name="use_sim_time" value="$(var use_sim_time)" />
+  </node>
+</launch>

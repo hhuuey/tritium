@@ -1,0 +1,8 @@
+name: tritium
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python==3.10.15
+  - qgis==3.40.2
+  - pip

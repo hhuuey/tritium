@@ -1,0 +1,10 @@
+project_path="script"
+supported_profiles=(ros1-noetic ros2-jazzy cpp-cpu python-cpu python-cuda)
+package="workspace"
+container="tritium-shell"
+foxglove_port="${TRITIUM_FOXGLOVE_PORT:-18767}"
+data_dir="$dataset_root"
+result_dir="$result_root/environment"
+vscode_volume="tritium-shell-vscode-server"
+dependencies=()
+ros_dependencies=()

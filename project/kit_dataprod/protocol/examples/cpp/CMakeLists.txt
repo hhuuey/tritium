@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.16)
+project(asset_protocol_example LANGUAGES CXX)
+# 同时支持源码仓库和导出的独立目录布局。
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../../cpp/asset_protocol/CMakeLists.txt")
+  add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../../cpp/asset_protocol" asset_protocol)
+else()
+  message(FATAL_ERROR "Missing cpp/asset_protocol protocol directory")
+endif()
+add_executable(asset-protocol-example main.cpp)
+target_link_libraries(asset-protocol-example PRIVATE asset_protocol::asset_protocol)

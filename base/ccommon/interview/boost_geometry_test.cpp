@@ -1,0 +1,86 @@
+#include <iostream>
+#include <boost/geometry.hpp>
+#include <boost/geometry/geometries/register/point.hpp>
+
+namespace bg = boost::geometry;
+using p_t = bg::model::d2::point_xy<double>;
+using seg_t = bg::model::segment<p_t>; //线段
+using line_t = bg::model::linestring<p_t>; //线
+using box_t = bg::model::box<p_t>; //box
+using poly_t = bg::model::polygon<p_t>; //polygon
+
+using geo_point = bg::model::point<double, 2, bg::cs::geographic<bg::degree>>; //地理坐标系,单位为度
+using geo_segment = bg::model::segment<geo_point>; //线段
+using geo_line = bg::model::linestring<geo_point>; //线
+using geo_ring = bg::model::ring<geo_point>;
+using geo_box = bg::model::box<geo_point>; //box
+
+struct MyPoint //自定义的点
+{
+    MyPoint(double x, double y, int id) :m_x(x), m_y(y), m_id(id) {}
+    double m_x;
+    double m_y;
+    int m_id; //标识id
+};
+//将MyPoint注册到bg的native类型中
+BOOST_GEOMETRY_REGISTER_POINT_2D(MyPoint, double, cs::cartesian, m_x, m_y)
+
+int main(int argc, char *argv[])
+{
+    /// 求地理距离
+    {
+        geo_point gp_beijing(116.23128, 40.22077); //北京经纬度坐标
+        geo_point gp_shanghai(121.48941, 31.40527); //上海经纬度坐标
+        auto dis = bg::distance(gp_beijing,gp_shanghai);
+        std::cout << "beijing and shanghai distance: " << dis/1000 << " km" << std::endl;
+    }
+
+    /// 点到线段的距离
+    {
+        geo_segment seg = { {0,1}, {4,1} };
+        geo_point gp_in(2, 0); //垂足在线段上
+        geo_point gp_out(5, 0); //垂足不在线段上
+        auto dis_in = bg::distance(gp_in, seg);
+        auto dis_out = bg::distance(gp_out, seg);
+        std::cout << "distance from " << bg::dsv(gp_in) << " to " << bg::dsv(seg) << " is " << dis_in << std::endl;
+        std::cout << "distance from " << bg::dsv(gp_out) << " to " << bg::dsv(seg) << " is " << dis_out << std::endl;
+    }
+
+    /// 点是否在图形内
+    {
+        geo_ring ring = { {0,0}, {0,2},{2,2},{2,0},{0,0} }; //矩形
+        geo_point gp_in(1, 1); //在图形内
+        geo_point gp_out(3, 0); //不在图形内
+        auto is_in = bg::within(gp_in, ring); //是否在图形内部
+        auto is_out = bg::within(gp_out, ring); //是否在图形内部
+        std::cout << bg::dsv(gp_in) << " locates inside" << bg::dsv(ring) << " " << is_in << std::endl;
+        std::cout  << bg::dsv(gp_out) << " locates inside" << bg::dsv(ring) << " " << is_out << std::endl;
+    }
+
+    /// 点乘操作
+    {
+        geo_point gp1(1, 0),gp2(1,1),gp3(0,1);
+        auto dp12 = bg::dot_product(gp1,gp2);
+        auto dp13 = bg::dot_product(gp1, gp3);
+        std::cout << bg::dsv(gp1) << "dot product" << bg::dsv(gp2) << "=" << dp12 << std::endl;
+        std::cout  << bg::dsv(gp1) << "dot product" << bg::dsv(gp3) << "=" << dp13 << std::endl;
+    }
+
+    /// 求外接矩形AABB
+    {
+        geo_line line = { {1,1},{2,0},{3,2} };
+        geo_box box;
+        bg::envelope(line, box);
+        std::cout << bg::dsv(line) << "'s AABB is " << bg::dsv(box) << std::endl;
+    }
+
+    /// 自定义点
+    {
+        using geo_point = MyPoint;
+        geo_point gp1(0,0,1), gp2(1,0,2);
+        auto dis = bg::distance(gp1,gp2);
+        std::cout << bg::dsv(gp1) << " distant from " << bg::dsv(gp2) << " is " << dis <<std::endl;
+    }
+
+    return 0;
+}

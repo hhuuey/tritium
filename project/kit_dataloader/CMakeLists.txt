@@ -1,0 +1,7 @@
+#find_package(PNG REQUIRED)
+#message("PNG_INCLUDE_DIR: ${PNG_INCLUDE_DIR}")
+#message("PNG_LIBRARY: ${PNG_LIBRARY}")
+#include_directories(${PNG_INCLUDE_DIR})
+find_package(Eigen3 REQUIRED)
+add_executable(kitti_node kitti_node.cpp)
+target_link_libraries(kitti_node ${PNG_LIBRARY} Eigen3::Eigen)

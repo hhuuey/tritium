@@ -1,0 +1,2189 @@
+{
+  "description": "Common v1.0 protocol conformance messages for Python and C++; parser-only and cross-message constraints complement JSON Schema.",
+  "valid_requests": [
+    {
+      "name": "minimal",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "ordered_scene_and_empty",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case",
+              "scene_id": "scene-b",
+              "metadata": {
+                "nested": [
+                  null,
+                  true,
+                  {
+                    "备注": "a\u0000b"
+                  }
+                ]
+              }
+            },
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "/tmp/second",
+              "data_version": "upstream-version",
+              "case_id": "another-case",
+              "scene_id": "scene-a",
+              "metadata": {
+                "nested": [
+                  null,
+                  true,
+                  {
+                    "备注": "a\u0000b"
+                  }
+                ]
+              }
+            }
+          ],
+          "scene_camera_masks": []
+        },
+        "scene_id": "scene-二"
+      }
+    },
+    {
+      "name": "no_inputs",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {},
+        "scene_id": null
+      }
+    },
+    {
+      "name": "nonblank_embedded_nul",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "\u0000a",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "invalid_requests": [
+    {
+      "name": "missing_protocol_version",
+      "value": {
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "missing_asset_name",
+      "value": {
+        "protocol_version": "v1.0",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "missing_case_id",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "missing_data_version",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "missing_output_uri",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "missing_config_path",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "missing_inputs",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml"
+      }
+    },
+    {
+      "name": "asset_name_empty",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": " ",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "asset_name_type",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": 1,
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "case_id_empty",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": " ",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "case_id_type",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": 1,
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "data_version_empty",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": " ",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "data_version_type",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": 1,
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "output_uri_empty",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": " ",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "output_uri_type",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": 1,
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "config_path_empty",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": " ",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "config_path_type",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": 1,
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "unsupported_protocol",
+      "value": {
+        "protocol_version": "unsupported",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "unknown_field",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        },
+        "outputs": {}
+      }
+    },
+    {
+      "name": "scene_type",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        },
+        "scene_id": []
+      }
+    },
+    {
+      "name": "scene_blank",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        },
+        "scene_id": "　"
+      }
+    },
+    {
+      "name": "inputs_null",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": null
+      }
+    },
+    {
+      "name": "inputs_array",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": []
+      }
+    },
+    {
+      "name": "key_blank",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          " ": []
+        }
+      }
+    },
+    {
+      "name": "key_nul",
+      "document": "{\"protocol_version\": \"v1.0\", \"asset_name\": \"scene_vector_maps\", \"case_id\": \"case-甲\", \"data_version\": \"output-version\", \"output_uri\": \"/tmp/output/payload\", \"config_path\": \"/tmp/config.yaml\", \"inputs\": {\"a\\u0000b\": []}}",
+      "validation": "lexical"
+    },
+    {
+      "name": "references_null",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": null
+        }
+      }
+    },
+    {
+      "name": "references_scalar",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": {}
+        }
+      }
+    },
+    {
+      "name": "reference_null",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "name": "reference_missing_asset_name",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "reference_missing_uri",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "reference_missing_data_version",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "reference_missing_case_id",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "producer_mismatch",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "localization",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      },
+      "validation": "relationship"
+    },
+    {
+      "name": "reference_unknown",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case",
+              "unknown": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "reference_scene",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case",
+              "scene_id": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "reference_metadata",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case",
+              "metadata": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "reference_uri",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": false,
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "reference_version",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "reference_case",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": null
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "valid_results": [
+    {
+      "name": "minimal_success",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "success",
+        "error": null
+      }
+    },
+    {
+      "name": "rich_success",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "success",
+        "error": null,
+        "scene_id": "scene-二",
+        "metrics": {
+          "nested": {
+            "finite": 0.25,
+            "min_int": -9223372036854775808,
+            "max_int": 18446744073709551615
+          },
+          "values": [
+            null,
+            false,
+            "说明\u0000内容"
+          ]
+        },
+        "metadata": {
+          "uri": "file:///真实位置",
+          "version": "independent-version"
+        }
+      },
+      "expected_tokens": [
+        {
+          "path": [
+            "metrics",
+            "nested",
+            "min_int"
+          ],
+          "token": "-9223372036854775808"
+        },
+        {
+          "path": [
+            "metrics",
+            "nested",
+            "max_int"
+          ],
+          "token": "18446744073709551615"
+        }
+      ]
+    },
+    {
+      "name": "failed_input",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "failed",
+        "error": {
+          "category": "input",
+          "code": "BAD_INPUT",
+          "message": "输入无效",
+          "details": {
+            "context": [
+              1,
+              "原因",
+              null
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "failed_resource",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "failed",
+        "error": {
+          "category": "resource",
+          "code": "BAD_INPUT",
+          "message": "输入无效",
+          "details": {
+            "context": [
+              1,
+              "原因",
+              null
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "failed_algorithm",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "failed",
+        "error": {
+          "category": "algorithm",
+          "code": "BAD_INPUT",
+          "message": "输入无效",
+          "details": {
+            "context": [
+              1,
+              "原因",
+              null
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "failed_process",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "failed",
+        "error": {
+          "category": "process",
+          "code": "BAD_INPUT",
+          "message": "输入无效",
+          "details": {
+            "context": [
+              1,
+              "原因",
+              null
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "failed_protocol",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "failed",
+        "error": {
+          "category": "protocol",
+          "code": "BAD_INPUT",
+          "message": "输入无效",
+          "details": {
+            "context": [
+              1,
+              "原因",
+              null
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "error_defaults",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "failed",
+        "error": {
+          "category": "protocol",
+          "code": "BAD_INPUT",
+          "message": "输入无效"
+        }
+      }
+    },
+    {
+      "name": "nonblank_embedded_nul",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "\u0000",
+        "data_version": "output-version",
+        "status": "success",
+        "error": null
+      }
+    }
+  ],
+  "invalid_results": [
+    {
+      "name": "missing_protocol_version",
+      "value": {
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "success",
+        "error": null
+      }
+    },
+    {
+      "name": "missing_asset_name",
+      "value": {
+        "protocol_version": "v1.0",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "success",
+        "error": null
+      }
+    },
+    {
+      "name": "missing_case_id",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "data_version": "output-version",
+        "status": "success",
+        "error": null
+      }
+    },
+    {
+      "name": "missing_data_version",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "status": "success",
+        "error": null
+      }
+    },
+    {
+      "name": "missing_status",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "error": null
+      }
+    },
+    {
+      "name": "missing_error",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "success"
+      }
+    },
+    {
+      "name": "unsupported_protocol",
+      "value": {
+        "protocol_version": "unsupported",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "success",
+        "error": null
+      }
+    },
+    {
+      "name": "unknown_field",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "success",
+        "error": null,
+        "outputs": {}
+      }
+    },
+    {
+      "name": "case_type",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": [],
+        "data_version": "output-version",
+        "status": "success",
+        "error": null
+      }
+    },
+    {
+      "name": "asset_empty",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": " ",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "success",
+        "error": null
+      }
+    },
+    {
+      "name": "scene_empty",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "success",
+        "error": null,
+        "scene_id": ""
+      }
+    },
+    {
+      "name": "scene_type",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "success",
+        "error": null,
+        "scene_id": false
+      }
+    },
+    {
+      "name": "metrics_type",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "success",
+        "error": null,
+        "metrics": []
+      }
+    },
+    {
+      "name": "metadata_type",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "success",
+        "error": null,
+        "metadata": null
+      }
+    },
+    {
+      "name": "status_invalid",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "unknown",
+        "error": null
+      }
+    },
+    {
+      "name": "failed_without_error",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "failed",
+        "error": null
+      }
+    },
+    {
+      "name": "error_scalar",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "success",
+        "error": "failed"
+      }
+    },
+    {
+      "name": "success_with_error",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "success",
+        "error": {
+          "category": "algorithm",
+          "code": "X",
+          "message": "失败"
+        }
+      }
+    },
+    {
+      "name": "error_missing_category",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "failed",
+        "error": {
+          "code": "X",
+          "message": "失败"
+        }
+      }
+    },
+    {
+      "name": "error_missing_code",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "failed",
+        "error": {
+          "category": "algorithm",
+          "message": "失败"
+        }
+      }
+    },
+    {
+      "name": "error_missing_message",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "failed",
+        "error": {
+          "category": "algorithm",
+          "code": "X"
+        }
+      }
+    },
+    {
+      "name": "error_unknown_category",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "failed",
+        "error": {
+          "category": "unknown",
+          "code": "X",
+          "message": "失败"
+        }
+      }
+    },
+    {
+      "name": "error_blank_code",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "failed",
+        "error": {
+          "category": "algorithm",
+          "code": " ",
+          "message": "失败"
+        }
+      }
+    },
+    {
+      "name": "error_message_type",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "failed",
+        "error": {
+          "category": "algorithm",
+          "code": "X",
+          "message": []
+        }
+      }
+    },
+    {
+      "name": "error_details_type",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "failed",
+        "error": {
+          "category": "algorithm",
+          "code": "X",
+          "message": "失败",
+          "details": []
+        }
+      }
+    },
+    {
+      "name": "error_unknown_field",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "failed",
+        "error": {
+          "category": "algorithm",
+          "code": "X",
+          "message": "失败",
+          "unknown": 1
+        }
+      }
+    }
+  ],
+  "valid_artifact_refs": [
+    {
+      "name": "minimal",
+      "value": {
+        "asset_name": "scene_raster_maps",
+        "uri": "s3://bucket/path",
+        "data_version": "upstream-version",
+        "case_id": "another-case"
+      }
+    },
+    {
+      "name": "rich",
+      "value": {
+        "asset_name": "scene_raster_maps",
+        "uri": "s3://bucket/path",
+        "data_version": "upstream-version",
+        "case_id": "another-case",
+        "scene_id": "scene-b",
+        "metadata": {
+          "nested": [
+            null,
+            true,
+            {
+              "备注": "a\u0000b"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "nonblank_embedded_nul",
+      "value": {
+        "asset_name": "scene_raster_maps",
+        "uri": "路径\u0000😀",
+        "data_version": "upstream-version",
+        "case_id": "another-case"
+      }
+    }
+  ],
+  "invalid_artifact_refs": [
+    {
+      "name": "reference_null",
+      "value": null
+    },
+    {
+      "name": "reference_missing_asset_name",
+      "value": {
+        "uri": "s3://bucket/path",
+        "data_version": "upstream-version",
+        "case_id": "another-case"
+      }
+    },
+    {
+      "name": "reference_missing_uri",
+      "value": {
+        "asset_name": "scene_raster_maps",
+        "data_version": "upstream-version",
+        "case_id": "another-case"
+      }
+    },
+    {
+      "name": "reference_missing_data_version",
+      "value": {
+        "asset_name": "scene_raster_maps",
+        "uri": "s3://bucket/path",
+        "case_id": "another-case"
+      }
+    },
+    {
+      "name": "reference_missing_case_id",
+      "value": {
+        "asset_name": "scene_raster_maps",
+        "uri": "s3://bucket/path",
+        "data_version": "upstream-version"
+      }
+    },
+    {
+      "name": "reference_unknown",
+      "value": {
+        "asset_name": "scene_raster_maps",
+        "uri": "s3://bucket/path",
+        "data_version": "upstream-version",
+        "case_id": "another-case",
+        "unknown": 1
+      }
+    },
+    {
+      "name": "reference_scene",
+      "value": {
+        "asset_name": "scene_raster_maps",
+        "uri": "s3://bucket/path",
+        "data_version": "upstream-version",
+        "case_id": "another-case",
+        "scene_id": 1
+      }
+    },
+    {
+      "name": "reference_metadata",
+      "value": {
+        "asset_name": "scene_raster_maps",
+        "uri": "s3://bucket/path",
+        "data_version": "upstream-version",
+        "case_id": "another-case",
+        "metadata": []
+      }
+    },
+    {
+      "name": "reference_uri",
+      "value": {
+        "asset_name": "scene_raster_maps",
+        "uri": false,
+        "data_version": "upstream-version",
+        "case_id": "another-case"
+      }
+    },
+    {
+      "name": "reference_version",
+      "value": {
+        "asset_name": "scene_raster_maps",
+        "uri": "s3://bucket/path",
+        "data_version": "",
+        "case_id": "another-case"
+      }
+    },
+    {
+      "name": "reference_case",
+      "value": {
+        "asset_name": "scene_raster_maps",
+        "uri": "s3://bucket/path",
+        "data_version": "upstream-version",
+        "case_id": null
+      }
+    }
+  ],
+  "valid_errors": [
+    {
+      "name": "failed_input",
+      "value": {
+        "category": "input",
+        "code": "BAD_INPUT",
+        "message": "输入无效",
+        "details": {
+          "context": [
+            1,
+            "原因",
+            null
+          ]
+        }
+      }
+    },
+    {
+      "name": "failed_resource",
+      "value": {
+        "category": "resource",
+        "code": "BAD_INPUT",
+        "message": "输入无效",
+        "details": {
+          "context": [
+            1,
+            "原因",
+            null
+          ]
+        }
+      }
+    },
+    {
+      "name": "failed_algorithm",
+      "value": {
+        "category": "algorithm",
+        "code": "BAD_INPUT",
+        "message": "输入无效",
+        "details": {
+          "context": [
+            1,
+            "原因",
+            null
+          ]
+        }
+      }
+    },
+    {
+      "name": "failed_process",
+      "value": {
+        "category": "process",
+        "code": "BAD_INPUT",
+        "message": "输入无效",
+        "details": {
+          "context": [
+            1,
+            "原因",
+            null
+          ]
+        }
+      }
+    },
+    {
+      "name": "failed_protocol",
+      "value": {
+        "category": "protocol",
+        "code": "BAD_INPUT",
+        "message": "输入无效",
+        "details": {
+          "context": [
+            1,
+            "原因",
+            null
+          ]
+        }
+      }
+    },
+    {
+      "name": "error_defaults",
+      "value": {
+        "category": "protocol",
+        "code": "BAD_INPUT",
+        "message": "输入无效"
+      }
+    },
+    {
+      "name": "nonblank_embedded_nul",
+      "value": {
+        "category": "input",
+        "code": "\u0000ERR",
+        "message": "输入无效",
+        "details": {
+          "context": [
+            1,
+            "原因",
+            null
+          ]
+        }
+      }
+    }
+  ],
+  "invalid_errors": [
+    {
+      "name": "error_scalar",
+      "value": "failed"
+    },
+    {
+      "name": "error_missing_category",
+      "value": {
+        "code": "X",
+        "message": "失败"
+      }
+    },
+    {
+      "name": "error_missing_code",
+      "value": {
+        "category": "algorithm",
+        "message": "失败"
+      }
+    },
+    {
+      "name": "error_missing_message",
+      "value": {
+        "category": "algorithm",
+        "code": "X"
+      }
+    },
+    {
+      "name": "error_unknown_category",
+      "value": {
+        "category": "unknown",
+        "code": "X",
+        "message": "失败"
+      }
+    },
+    {
+      "name": "error_blank_code",
+      "value": {
+        "category": "algorithm",
+        "code": " ",
+        "message": "失败"
+      }
+    },
+    {
+      "name": "error_message_type",
+      "value": {
+        "category": "algorithm",
+        "code": "X",
+        "message": []
+      }
+    },
+    {
+      "name": "error_details_type",
+      "value": {
+        "category": "algorithm",
+        "code": "X",
+        "message": "失败",
+        "details": []
+      }
+    },
+    {
+      "name": "error_unknown_field",
+      "value": {
+        "category": "algorithm",
+        "code": "X",
+        "message": "失败",
+        "unknown": 1
+      }
+    }
+  ],
+  "valid_identities": [
+    {
+      "name": "minimal",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version"
+      }
+    },
+    {
+      "name": "scene",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "scene_id": "scene-二"
+      }
+    },
+    {
+      "name": "null_scene",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "scene_id": null
+      }
+    },
+    {
+      "name": "nonblank_embedded_nul",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "\u0000版本"
+      }
+    }
+  ],
+  "invalid_identities": [
+    {
+      "name": "missing_protocol_version",
+      "value": {
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version"
+      }
+    },
+    {
+      "name": "missing_asset_name",
+      "value": {
+        "protocol_version": "v1.0",
+        "case_id": "case-甲",
+        "data_version": "output-version"
+      }
+    },
+    {
+      "name": "missing_case_id",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "data_version": "output-version"
+      }
+    },
+    {
+      "name": "missing_data_version",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲"
+      }
+    },
+    {
+      "name": "unsupported_protocol",
+      "value": {
+        "protocol_version": "unsupported",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version"
+      }
+    },
+    {
+      "name": "unknown_field",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "unknown": 1
+      }
+    },
+    {
+      "name": "blank_asset",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": " ",
+        "case_id": "case-甲",
+        "data_version": "output-version"
+      }
+    },
+    {
+      "name": "case_type",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": false,
+        "data_version": "output-version"
+      }
+    },
+    {
+      "name": "blank_scene",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "scene_id": "　"
+      }
+    },
+    {
+      "name": "scene_type",
+      "value": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "scene_id": 1
+      }
+    }
+  ],
+  "valid_json_documents": [
+    {
+      "name": "unicode_integer_boundaries",
+      "text": "{\"integers\": [-9223372036854775808, 18446744073709551615], \"text\": \"中文😀\\u0000\", \"empty\": []}",
+      "expected_tokens": [
+        {
+          "path": [
+            "integers",
+            0
+          ],
+          "token": "-9223372036854775808"
+        },
+        {
+          "path": [
+            "integers",
+            1
+          ],
+          "token": "18446744073709551615"
+        }
+      ]
+    },
+    {
+      "name": "finite_float",
+      "text": "{\"large_float\":1e40,\"integral_float\":18446744073709551616.0,\"fraction\":0.25}",
+      "expected_tokens": [
+        {
+          "path": [
+            "large_float"
+          ],
+          "token": "1e40"
+        },
+        {
+          "path": [
+            "integral_float"
+          ],
+          "token": "18446744073709551616.0"
+        }
+      ]
+    },
+    {
+      "name": "top_level_null",
+      "text": "null"
+    },
+    {
+      "name": "escaped_surrogate_pair_and_nul",
+      "text": "{\"emoji\":\"\\ud83d\\ude00\",\"nul\":\"\\u0000\"}"
+    },
+    {
+      "name": "top_level_uint64_min",
+      "text": "9223372036854775808",
+      "expected_tokens": [
+        {
+          "path": [],
+          "token": "9223372036854775808"
+        }
+      ]
+    },
+    {
+      "name": "top_level_uint64_max",
+      "text": "18446744073709551615",
+      "expected_tokens": [
+        {
+          "path": [],
+          "token": "18446744073709551615"
+        }
+      ]
+    },
+    {
+      "name": "nested_mixed_numeric_tokens",
+      "text": "{\"digits\":\"18446744073709551615\",\"bool\":true,\"nil\":null,\"mixed\":[0,1e40,{\"\\u0062\":9223372036854775808,\"a\":18446744073709551615},-1,18446744073709551616.0],\"last\":0.25}",
+      "expected_tokens": [
+        {
+          "path": [
+            "digits"
+          ],
+          "token": "\"18446744073709551615\""
+        },
+        {
+          "path": [
+            "mixed",
+            0
+          ],
+          "token": "0"
+        },
+        {
+          "path": [
+            "mixed",
+            1
+          ],
+          "token": "1e40"
+        },
+        {
+          "path": [
+            "mixed",
+            2,
+            "b"
+          ],
+          "token": "9223372036854775808"
+        },
+        {
+          "path": [
+            "mixed",
+            2,
+            "a"
+          ],
+          "token": "18446744073709551615"
+        },
+        {
+          "path": [
+            "mixed",
+            3
+          ],
+          "token": "-1"
+        },
+        {
+          "path": [
+            "mixed",
+            4
+          ],
+          "token": "18446744073709551616.0"
+        },
+        {
+          "path": [
+            "last"
+          ],
+          "token": "0.25"
+        }
+      ]
+    }
+  ],
+  "invalid_json_documents": [
+    {
+      "name": "duplicate_key",
+      "text": "{\"a\":1,\"a\":2}"
+    },
+    {
+      "name": "duplicate_escaped_key",
+      "text": "{\"a\":1,\"\\u0061\":2}"
+    },
+    {
+      "name": "nested_duplicate",
+      "text": "{\"nested\":{\"a\":1,\"a\":2}}"
+    },
+    {
+      "name": "trailing_document",
+      "text": "{} {}"
+    },
+    {
+      "name": "trailing_text",
+      "text": "{} extra"
+    },
+    {
+      "name": "non_finite_nan",
+      "text": "NaN"
+    },
+    {
+      "name": "non_finite_infinity",
+      "text": "Infinity"
+    },
+    {
+      "name": "exponent_overflow",
+      "text": "1e400"
+    },
+    {
+      "name": "leading_zero",
+      "text": "01"
+    },
+    {
+      "name": "integer_underflow",
+      "text": "-9223372036854775809"
+    },
+    {
+      "name": "integer_overflow",
+      "text": "18446744073709551616"
+    },
+    {
+      "name": "invalid_utf8",
+      "hex": "7b2276616c7565223a22ff227d"
+    },
+    {
+      "name": "lone_high_surrogate",
+      "text": "\"\\ud800\""
+    },
+    {
+      "name": "lone_low_surrogate",
+      "text": "\"\\udfff\""
+    },
+    {
+      "name": "nul_key",
+      "text": "{\"a\\u0000b\":1}"
+    },
+    {
+      "name": "trailing_array_comma",
+      "text": "[1,]"
+    }
+  ],
+  "result_identities": [
+    {
+      "name": "same_identity",
+      "request": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      },
+      "result": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "success",
+        "error": null
+      },
+      "valid": true
+    },
+    {
+      "name": "mismatched_asset_name",
+      "request": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      },
+      "result": {
+        "protocol_version": "v1.0",
+        "asset_name": "other",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "success",
+        "error": null
+      },
+      "valid": false
+    },
+    {
+      "name": "mismatched_case_id",
+      "request": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      },
+      "result": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "other",
+        "data_version": "output-version",
+        "status": "success",
+        "error": null
+      },
+      "valid": false
+    },
+    {
+      "name": "mismatched_data_version",
+      "request": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      },
+      "result": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "other",
+        "status": "success",
+        "error": null
+      },
+      "valid": false
+    },
+    {
+      "name": "mismatched_scene_id",
+      "request": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        }
+      },
+      "result": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "success",
+        "error": null,
+        "scene_id": "other"
+      },
+      "valid": false
+    },
+    {
+      "name": "same_scene_identity",
+      "request": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "output_uri": "/tmp/output/payload",
+        "config_path": "/tmp/config.yaml",
+        "inputs": {
+          "scene_raster_maps": [
+            {
+              "asset_name": "scene_raster_maps",
+              "uri": "s3://bucket/path",
+              "data_version": "upstream-version",
+              "case_id": "another-case"
+            }
+          ]
+        },
+        "scene_id": "scene-二"
+      },
+      "result": {
+        "protocol_version": "v1.0",
+        "asset_name": "scene_vector_maps",
+        "case_id": "case-甲",
+        "data_version": "output-version",
+        "status": "success",
+        "error": null,
+        "scene_id": "scene-二"
+      },
+      "valid": true
+    }
+  ]
+}

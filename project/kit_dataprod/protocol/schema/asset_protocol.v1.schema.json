@@ -1,0 +1,354 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:asset-protocol:v1.0",
+  "title": "Asset process protocol v1.0",
+  "description": "Shared structural contract for Python and C++. All objects reject unknown model fields; JSON containers in metadata, metrics and details remain open.",
+  "$comment": "Use this schema together with fixtures/contract.json. JSON text must be strict UTF-8, contain exactly one document, use no duplicate keys or NUL object keys, have valid Unicode scalars, finite numbers and supported integer tokens. Parsers enforce these lexical conditions before schema-level model validation. Request input key/reference equality and request/result identity equality are runtime relationship checks.",
+  "oneOf": [
+    {
+      "$ref": "#/definitions/AssetRequest"
+    },
+    {
+      "$ref": "#/definitions/AssetResult"
+    },
+    {
+      "$ref": "#/definitions/ArtifactRef"
+    },
+    {
+      "$ref": "#/definitions/AssetError"
+    },
+    {
+      "$ref": "#/definitions/AssetIdentity"
+    }
+  ],
+  "definitions": {
+    "JsonString": {
+      "type": "string",
+      "description": "Unicode scalar values, checked by strict JSON parsing."
+    },
+    "NonBlankString": {
+      "type": "string",
+      "format": "non-blank",
+      "description": "Contains at least one Unicode character outside Python str.strip whitespace."
+    },
+    "JsonInteger": {
+      "type": "integer",
+      "minimum": -9223372036854775808,
+      "maximum": 18446744073709551615,
+      "description": "Bounds for a JSON integer token (no decimal point or exponent)."
+    },
+    "JsonNumber": {
+      "type": "number",
+      "minimum": -1.7976931348623157e+308,
+      "maximum": 1.7976931348623157e+308,
+      "x-integer-token-minimum": -9223372036854775808,
+      "x-integer-token-maximum": 18446744073709551615,
+      "$comment": "JSON Schema treats 1 and 1.0 as integers and cannot inspect source tokens. The strict parsers apply JsonInteger bounds to integer tokens, and finite IEEE-754 double bounds to tokens containing a decimal point or exponent. The x-integer-token-* annotations and shared raw-document fixtures define this lexical rule without narrowing existing float semantics."
+    },
+    "JsonValue": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "$ref": "#/definitions/JsonNumber"
+        },
+        {
+          "$ref": "#/definitions/JsonString"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue"
+          }
+        },
+        {
+          "$ref": "#/definitions/JsonObject"
+        }
+      ]
+    },
+    "JsonObject": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "AssetIdentity": {
+      "type": "object",
+      "description": "Execution identity; scene_id is optional and defaults to null.",
+      "properties": {
+        "asset_name": {
+          "$ref": "#/definitions/NonBlankString"
+        },
+        "case_id": {
+          "$ref": "#/definitions/NonBlankString"
+        },
+        "data_version": {
+          "$ref": "#/definitions/NonBlankString"
+        },
+        "scene_id": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/NonBlankString"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "protocol_version": {
+          "type": "string",
+          "const": "v1.0",
+          "default": "v1.0"
+        }
+      },
+      "required": [
+        "protocol_version",
+        "asset_name",
+        "case_id",
+        "data_version"
+      ],
+      "additionalProperties": false
+    },
+    "ArtifactRef": {
+      "type": "object",
+      "description": "Reference identity and URI are preserved verbatim; protocol does not enforce business Case/Scene relationships.",
+      "properties": {
+        "asset_name": {
+          "$ref": "#/definitions/NonBlankString"
+        },
+        "uri": {
+          "$ref": "#/definitions/NonBlankString"
+        },
+        "data_version": {
+          "$ref": "#/definitions/NonBlankString"
+        },
+        "case_id": {
+          "$ref": "#/definitions/NonBlankString"
+        },
+        "scene_id": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/NonBlankString"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "metadata": {
+          "$ref": "#/definitions/JsonObject",
+          "default": {}
+        }
+      },
+      "required": [
+        "asset_name",
+        "uri",
+        "data_version",
+        "case_id"
+      ],
+      "additionalProperties": false
+    },
+    "AssetRequest": {
+      "type": "object",
+      "description": "Asset invocation. Input lists preserve order and may be empty.",
+      "properties": {
+        "asset_name": {
+          "$ref": "#/definitions/NonBlankString"
+        },
+        "case_id": {
+          "$ref": "#/definitions/NonBlankString"
+        },
+        "data_version": {
+          "$ref": "#/definitions/NonBlankString"
+        },
+        "output_uri": {
+          "$ref": "#/definitions/NonBlankString"
+        },
+        "config_path": {
+          "$ref": "#/definitions/NonBlankString"
+        },
+        "inputs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ArtifactRef"
+            }
+          },
+          "$comment": "Each ArtifactRef.asset_name must equal its inputs key. This cross-field relationship is checked by both runtimes and shared fixtures.",
+          "default": {},
+          "propertyNames": {
+            "$ref": "#/definitions/NonBlankString"
+          }
+        },
+        "scene_id": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/NonBlankString"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "protocol_version": {
+          "type": "string",
+          "const": "v1.0",
+          "default": "v1.0"
+        }
+      },
+      "required": [
+        "protocol_version",
+        "asset_name",
+        "case_id",
+        "data_version",
+        "output_uri",
+        "config_path",
+        "inputs"
+      ],
+      "additionalProperties": false
+    },
+    "AssetError": {
+      "type": "object",
+      "description": "Structured protocol, input, resource, process or algorithm failure.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "enum": [
+            "input",
+            "resource",
+            "algorithm",
+            "process",
+            "protocol"
+          ]
+        },
+        "code": {
+          "$ref": "#/definitions/NonBlankString"
+        },
+        "message": {
+          "$ref": "#/definitions/NonBlankString"
+        },
+        "details": {
+          "$ref": "#/definitions/JsonObject",
+          "default": {}
+        }
+      },
+      "required": [
+        "category",
+        "code",
+        "message"
+      ],
+      "additionalProperties": false
+    },
+    "AssetResult": {
+      "type": "object",
+      "description": "Result identity must match its request across protocol_version, asset_name, case_id, data_version and normalized scene_id.",
+      "properties": {
+        "asset_name": {
+          "$ref": "#/definitions/NonBlankString"
+        },
+        "case_id": {
+          "$ref": "#/definitions/NonBlankString"
+        },
+        "data_version": {
+          "$ref": "#/definitions/NonBlankString"
+        },
+        "scene_id": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/NonBlankString"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "success",
+            "failed"
+          ]
+        },
+        "error": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/AssetError"
+            }
+          ]
+        },
+        "metrics": {
+          "$ref": "#/definitions/JsonObject",
+          "default": {}
+        },
+        "metadata": {
+          "$ref": "#/definitions/JsonObject",
+          "default": {}
+        },
+        "protocol_version": {
+          "type": "string",
+          "const": "v1.0",
+          "default": "v1.0"
+        }
+      },
+      "required": [
+        "protocol_version",
+        "asset_name",
+        "case_id",
+        "data_version",
+        "status",
+        "error"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "success"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "error": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "failed"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "error": {
+                "$ref": "#/definitions/AssetError"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

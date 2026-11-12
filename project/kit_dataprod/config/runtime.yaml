@@ -1,0 +1,18 @@
+environment: local
+paths:
+  dagster_home: .dagster_home
+  artifact_root: .artifacts
+  manifest_root: .artifacts/manifests
+dagster:
+  grpc_timeout_seconds: 300
+  host: 0.0.0.0
+  port: 3000
+pools:
+  nas_io: 1
+  cpu_heavy: 2
+  gpu_calibration: 1
+  case_raster_map: 1
+  scene_raster_maps: 2
+  gpu_segmentation: 2
+  gpu_vector_map: 2
+  gpu_training: 2

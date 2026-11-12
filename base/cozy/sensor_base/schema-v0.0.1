@@ -1,0 +1,79 @@
+%%{init: {'flowchart': {'rankDir': 'TB'}}}%%
+erDiagram
+    SensorRecord {
+      string sensor_id PK
+      string sensor_type
+    }
+
+    SensorDataRecord {
+      string sensor_data_id PK
+      string sensor_id FK
+      int frame_sequence FK
+      string file_path
+    }
+
+    FrameRecord {
+      int sequence PK
+      str p_sensor_data_id FK
+      float timestamp
+    }
+
+    TFRecord {
+      string tf_id PK
+      string source_sensor_id FK
+      string target_sensor_id FK
+      quaternion rotation
+      vector translation
+      float timestamp
+    }
+
+    CamRecord {
+        np_array cam2img
+        int width
+        int height
+    }
+
+    Lidar4DRecord {
+        float[] range
+    }
+
+    ImgRecord {
+    }
+
+    Lidar4DPCDRecord {
+    }
+
+    DetRecord {
+        string det_id PK
+        string[] sensor_data_ids FK
+    }
+
+    Det2DRecord {
+        string matched_3d_det_id FK
+        string img_id FK
+    }
+
+    Det3DRecord {
+    }
+
+    DetRecord ||--o{ SensorDataRecord : has
+    DetRecord ||--o{ Det3DRecord : inherits
+    DetRecord ||--o{ Det2DRecord : inherits
+    Det2DRecord ||--o{ Det3DRecord : has
+    Det2DRecord ||--o{ ImgRecord : has
+
+    SensorDataRecord ||--o{ ImgRecord : inherits
+    SensorDataRecord ||--o{ Lidar4DPCDRecord : inherits
+
+    TFRecord }o--|| SensorRecord : source_sensor_id
+    TFRecord }o--|| SensorRecord : target_sensor_id
+
+    SensorRecord ||--o{ Lidar4DRecord : inherits
+    SensorRecord ||--o{ CamRecord : inherits
+    SensorRecord ||--o{ SensorDataRecord : has
+
+    CamRecord ||--o{ ImgRecord : has
+    Lidar4DRecord ||--o{ Lidar4DPCDRecord : has
+    FrameRecord ||--o{ SensorDataRecord : has
+    FrameRecord }o--|| SensorDataRecord : p_sensor_data_id
+

@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tritium-cozy"
+version = "0.1.0"
+description = "Tritium Cozy - Base libraries for road structure and mapping"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+authors = [
+    {name = "Huanghhdw", email = "your_email@example.com"},
+]
+keywords = ["road", "mapping", "geospatial", "GIS", "base-library"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent",
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+dependencies = [
+    "numpy",
+    "dbfread",
+    "geopandas",
+    "shapely",
+    "pyproj",
+    "dataclasses_json",
+    "pydantic",
+    "rasterio",
+    "rtree",
+    "opencv-python",
+    "iso3166",
+    "similaritymeasures"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov",
+    "black",
+    "flake8",
+]
+
+# 可视化功能
+visualization = [
+    "foxglove-sdk",
+    "mcap-protobuf-support",
+    "foxglove-schemas-protobuf",
+]
+
+[project.urls]
+Homepage = "https://github.com/huanghhdw/tritium"
+Repository = "https://github.com/huanghhdw/tritium.git"
+Issues = "https://github.com/huanghhdw/tritium/issues"
+
+[tool.setuptools.packages.find]
+where = [".."]
+include = ["cozy", "cozy.*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.txt", "*.md"]

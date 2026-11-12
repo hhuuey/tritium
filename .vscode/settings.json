@@ -1,0 +1,37 @@
+{
+    "workbench.editorAssociations": {
+        "*.md": "vscode.markdown.preview.editor"
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "eeyore.yapf",
+    "yapf.importStrategy": "useBundled",
+    "yapf.args": [
+        "--style",
+        ".style.yapf"
+    ],
+    "[python]": {
+        "editor.defaultFormatter": "eeyore.yapf",
+
+    },
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}",
+        "${workspaceFolder}/cozy",
+    ],
+    // "python.analysis.typeCheckingMode": "off", // 防止画出波浪线
+    "python.analysis.diagnosticMode": "openFilesOnly",
+    "terminal.integrated.env.osx": {
+        "PYTHONPYCACHEPREFIX": "${workspaceFolder}/.pycache_all"
+    },
+    // 设置默认的 Python 解释器路径
+    "python.defaultInterpreterPath": "/opt/homebrew/Caskroom/miniconda/base/envs/monolanemapping/bin/python",
+    "python.analysis.extraPaths": [
+        "/opt/homebrew/Caskroom/miniconda/base/envs/monolanemapping/share/qgis/python/"
+    ],
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "cmake.sourceDirectory": "/Users/huey/tritium/project/cpp_app",
+}

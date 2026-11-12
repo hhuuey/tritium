@@ -1,0 +1,72 @@
+qfile_snapshot:
+  module: algorithm.ingestion.qfile_snapshot.cli
+  data_version: v1.0
+  config_path: ../algorithm/ingestion/qfile_snapshot.yaml
+decoded_sensor_data:
+  module: algorithm.ingestion.decoded_sensor_data.cli
+  data_version: v1.0
+  config_path: ../algorithm/ingestion/decoded_sensor_data.yaml
+nuscenes_dataset:
+  module: algorithm.ingestion.nuscenes_dataset.cli
+  data_version: v1.0
+  config_path: ../algorithm/ingestion/nuscenes_dataset.yaml
+gt_point_cloud_snapshot:
+  module: algorithm.ingestion.ground_truth.gt_point_cloud_snapshot
+  data_version: v1.0
+  config_path: ../algorithm/ingestion/gt_point_cloud_snapshot.yaml
+gt_vector_labels_snapshot:
+  module: algorithm.ingestion.ground_truth.gt_vector_labels_snapshot
+  data_version: v1.0
+  config_path: ../algorithm/ingestion/gt_vector_labels_snapshot.yaml
+sensor_calibration:
+  executable: build/sensor_calibration/sensor_calibration
+  data_version: v1.0
+  config_path: ../algorithm/calib_localization/sensor_calibration.yaml
+localization:
+  executable: build/localization/localization
+  data_version: v1.0
+  config_path: ../algorithm/calib_localization/localization.yaml
+scene_camera_masks:
+  module: algorithm.segmentation.scene_camera_masks.cli
+  data_version: v1.0
+  config_path: ../algorithm/segmentation/scene_camera_masks.yaml
+case_raster_map:
+  executable: build/case_raster_map/case_raster_map
+  data_version: v1.0
+  config_path: ../algorithm/raster_map/case_raster_map.yaml
+scene_raster_maps:
+  module: algorithm.raster_map.scene_raster_maps
+  data_version: v1.0
+  config_path: ../algorithm/raster_map/scene_raster_maps.yaml
+scene_vector_maps:
+  module: algorithm.vector_map.scene_vector_maps
+  data_version: v1.0
+  config_path: ../algorithm/vector_map/scene_vector_maps.yaml
+case_vector_map:
+  module: algorithm.vector_map.case_vector_map
+  data_version: v1.0
+  config_path: ../algorithm/vector_map/case_vector_map.yaml
+vector_map_export:
+  module: algorithm.vector_map.vector_map_export
+  data_version: v1.0
+  config_path: ../algorithm/vector_map/vector_map_export.yaml
+refined_segmentation_labels:
+  module: algorithm.segmentation.training.refined_segmentation_labels
+  data_version: v1.0
+  config_path: ../algorithm/segmentation/refined_segmentation_labels.yaml
+segmentation_training_dataset:
+  module: algorithm.segmentation.training.segmentation_training_dataset
+  data_version: v1.0
+  config_path: ../algorithm/segmentation/segmentation_training_dataset.yaml
+segmentation_model_checkpoint:
+  module: algorithm.segmentation.training.segmentation_model_checkpoint
+  data_version: v1.0
+  config_path: ../algorithm/segmentation/segmentation_model_checkpoint.yaml
+vector_map_training_dataset:
+  module: algorithm.vector_map.training.vector_map_training_dataset
+  data_version: v1.0
+  config_path: ../algorithm/vector_map/vector_map_training_dataset.yaml
+vector_map_model_checkpoint:
+  module: algorithm.vector_map.training.vector_map_model_checkpoint
+  data_version: v1.0
+  config_path: ../algorithm/vector_map/vector_map_model_checkpoint.yaml

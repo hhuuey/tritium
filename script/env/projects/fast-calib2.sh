@@ -1,0 +1,10 @@
+project_path="project/core_calibration/FAST-Calib2"
+supported_profiles=(ros1-noetic)
+package="fast_calib"
+container="${FAST_CALIB2_CONTAINER:-fast-calib2}"
+foxglove_port="${FAST_CALIB2_FOXGLOVE_PORT:-8766}"
+data_dir="${FAST_CALIB2_DATA_DIR:-$dataset_root/fast-calib2}"
+result_dir="${FAST_CALIB2_RESULT_DIR:-$result_root/fast-calib2}"
+vscode_volume="fast-calib2-vscode-server"
+dependencies=(Livox-SDK livox_ros_driver)
+ros_dependencies=(livox_ros_driver)

@@ -1,0 +1,33 @@
+{
+  "eigen-3.3.7": {
+    "url": "https://github.com/eigenteam/eigen-git-mirror.git",
+    "commit": "cf794d3b741a6278df169e58461f8529f43bce5d"
+  },
+  "Sophus": {
+    "url": "https://github.com/strasdat/Sophus.git",
+    "commit": "a621ff2e56c56c839a6c40418d42c3c254424b5c",
+    "patch": "Sophus.patch"
+  },
+  "gtsam": {
+    "url": "https://github.com/borglab/gtsam.git",
+    "commit": "4f66a491ffc83cf092d0d818b11dc35135521612"
+  },
+  "Livox-SDK": {
+    "url": "https://github.com/Livox-SDK/Livox-SDK.git",
+    "commit": "7cf759a760ac674b7032c48b46ef8aaadab90383"
+  },
+  "rpg_vikit": {
+    "url": "https://github.com/xuankuzcr/rpg_vikit.git",
+    "commit": "6c886c8e5d83997806e00294826d528cea3581dd",
+    "patch": "rpg_vikit.patch"
+  },
+  "gnss_comm": {
+    "url": "https://github.com/HKUST-Aerial-Robotics/gnss_comm.git",
+    "commit": "a2035fec1cc427bba184d25ff1fde8dcf23c9ce1"
+  },
+  "livox_ros_driver": {
+    "url": "https://github.com/Livox-SDK/livox_ros_driver.git",
+    "commit": "3d240d5666129e1a3052e78ee8487a04b08fdda3",
+    "patch": "livox_ros_driver.patch"
+  }
+}

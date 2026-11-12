@@ -1,0 +1,33 @@
+diff --git a/livox_ros_driver/CMakeLists.txt b/livox_ros_driver/CMakeLists.txt
+index 0b10d19..f20256d 100644
+--- a/livox_ros_driver/CMakeLists.txt
++++ b/livox_ros_driver/CMakeLists.txt
+@@ -84,8 +84,10 @@ set(CMAKE_CXX_EXTENSIONS OFF)
+ 
+ ## make sure the livox_sdk_static library is installed
+ find_library(LIVOX_SDK_LIBRARY liblivox_sdk_static.a /usr/local/lib)
++find_path(LIVOX_SDK_INCLUDE_DIR livox_sdk.h)
+ 
+-if((NOT LIVOX_SDK_LIBRARY) OR (NOT EXISTS ${LIVOX_SDK_LIBRARY}))
++if((NOT LIVOX_SDK_LIBRARY) OR (NOT EXISTS ${LIVOX_SDK_LIBRARY}) OR (NOT LIVOX_SDK_INCLUDE_DIR))
++	message(FATAL_ERROR "Livox SDK is missing. Build the locked SDK before configuring this driver.")
+ 	# couldn't find the livox sdk library
+ 	message("Coudn't find livox sdk library!")
+ 	message("Download Livox-SDK from github and build&install it please!")
+@@ -181,6 +183,7 @@ target_include_directories(${PROJECT_NAME}_node
+     ${catkin_INCLUDE_DIRS}
+     ${PCL_INCLUDE_DIRS}
+     ${APR_INCLUDE_DIRS}
++    ${LIVOX_SDK_INCLUDE_DIR}
+     common
+     common/rapidjson
+     comon/rapdidxml
+@@ -194,7 +197,7 @@ target_include_directories(${PROJECT_NAME}_node
+ # link libraries
+ #---------------------------------------------------------------------------------------
+ target_link_libraries(${PROJECT_NAME}_node
+-	livox_sdk_static.a
++	${LIVOX_SDK_LIBRARY}
+ 	${Boost_LIBRARY}
+ 	${catkin_LIBRARIES}
+ 	${PCL_LIBRARIES}

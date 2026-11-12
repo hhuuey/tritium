@@ -1,0 +1,11 @@
+{
+  "name": "asset-protocol-codegen",
+  "private": true,
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "quicktype-core": "26.0.0"
+  }
+}

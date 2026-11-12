@@ -1,0 +1,26 @@
+numpy
+open3d
+folium
+
+# for mapping
+dbfread
+geopandas
+shapely
+pyproj
+dataclasses_json
+
+# localization
+PyOpenGL
+
+# foxglove sdk for Python
+foxglove-sdk
+foxglove-schemas-protobuf
+foxglove-schemas-jsonschema
+mcap
+mcap-protobuf-support
+
+# for data validation
+pydantic
+
+# png图转tiff
+rasterio

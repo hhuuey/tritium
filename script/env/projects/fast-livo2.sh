@@ -1,0 +1,10 @@
+project_path="project/core_localization"
+supported_profiles=(ros1-noetic ros2-jazzy cpp-cpu)
+package="fast_livo"
+container="${FAST_LIVO2_CONTAINER:-fast-livo2-rtk}"
+foxglove_port="${FAST_LIVO2_FOXGLOVE_PORT:-8765}"
+data_dir="${FAST_LIVO2_DATA_DIR:-$dataset_root/fast-livo2}"
+result_dir="${FAST_LIVO2_RESULT_DIR:-$result_root/fast-livo2}"
+vscode_volume="fast-livo2-vscode-server"
+dependencies=(Sophus gtsam Livox-SDK rpg_vikit gnss_comm livox_ros_driver)
+ros_dependencies=(gnss_comm livox_ros_driver)

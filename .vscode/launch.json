@@ -1,0 +1,72 @@
+{
+    // 使用 IntelliSense 了解相关属性。
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python 调试程序: 当前文件",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPYCACHEPREFIX": "${workspaceFolder}/.pycache_all"
+            }
+        },
+        {
+            "name": "Python: Module: visualization_base",
+            "type": "python",
+            "request": "launch",
+            "module": "cozy.visualization_base.${fileBasenameNoExtension}",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPYCACHEPREFIX": "${workspaceFolder}/.pycache_all"
+            }
+        },
+    {
+            "name": "Python: Module: map_base",
+            "type": "python",
+            "request": "launch",
+            "module": "cozy.map_base.${fileBasenameNoExtension}",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPYCACHEPREFIX": "${workspaceFolder}/.pycache_all"
+            }
+        },
+        {
+            "name": "VMA",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "/root/vma/combine/inference_and_combine_3.py",
+            "console": "integratedTerminal",
+                "env": {
+                "CXX": "g++",
+                "PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION": "python",
+                "PATH": "/mnt/cfs-baidu/public/pengyun.zhao/miniconda3/envs/vma/bin:/mnt/cfs-baidu/public/pengyun.zhao/miniconda3/bin:/mnt/cfs-baidu/public/pengyun.zhao/codes/gcc-5.4.0/bin:${env:PATH}",
+                "CUDA_HOME": "/mnt/cfs-baidu/public/pengyun.zhao/cuda-11.1"
+                },
+                "args": [
+                "--output_match_path", "/root/raw/LANE_RECON/12CRY0130_20250801T213635/1754055431000/1754055491000/input/12CRY0130_20250801T21363517540554310001754055491000.json",
+                "--is_parking", "0",
+                "--output_path", "/root/raw/result",
+                "--checkpoint", "/mnt/cfs-baidu/public/pengyun.zhao/ckpts/models/single/epoch_50_010.pth",
+                "--config_path", "/mnt/cfs-baidu/public/pengyun.zhao/ckpts/models/single/vma_ge_res101_e50_line_phigent_4d_urban_010.py",
+                "--multi_checkpoint", "/mnt/cfs-baidu/public/pengyun.zhao/ckpts/models/line/v010/epoch_60.pth",
+                "--multi_config_path", "/mnt/cfs-baidu/public/pengyun.zhao/ckpts/models/line/v010/vmav2_qr_res101_e60_line_phigent_4d_multi_urban_010.py",
+                "--box_checkpoint", "/mnt/cfs-baidu/public/pengyun.zhao/ckpts/models/single/epoch_box_80.pth",
+                "--box_config_path", "/mnt/cfs-baidu/public/pengyun.zhao/ckpts/models/single/vma_res152_e80_box_phigent_4d_urban_001.py",
+                "--box_multi_checkpoint", "/mnt/cfs-baidu/public/pengyun.zhao/ckpts/models/box/v006/epoch_80.pth",
+                "--box_multi_config_path", "/mnt/cfs-baidu/public/pengyun.zhao/ckpts/models/box/v006/vmav2_qr_res101_e80_box_phigent_4d_multi_urban_006.py",
+                "--parking_checkpoint", "/mnt/cfs-baidu/public/pengyun.zhao/ckpts/models/parking/v002-1/epoch_200.pth",
+                "--parking_config_path", "/mnt/cfs-baidu/public/pengyun.zhao/ckpts/models/parking/v002-1/vmav2_qr_res101_e200_parking_phigent_4d_multi_002-1.py"
+                ],
+                "python": "/mnt/cfs-baidu/public/pengyun.zhao/miniconda3/envs/vma/bin/python",
+                "cwd": "/root/vma"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.16)
+project(fast_livo_offline LANGUAGES C CXX)
+find_package(fast_livo_core CONFIG REQUIRED)
+find_package(fast_livo_io CONFIG REQUIRED)
+add_executable(fast_livo_offline main.cpp)
+target_compile_features(fast_livo_offline PRIVATE cxx_std_17)
+target_link_libraries(fast_livo_offline PRIVATE fast_livo::core fast_livo::fast_livo_io)
+install(TARGETS fast_livo_offline RUNTIME DESTINATION bin)

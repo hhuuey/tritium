@@ -1,0 +1,19 @@
+<launch>
+  <arg name="foxglove" default="true" />
+  <arg name="foxglove_port" default="8765" />
+  <arg name="outputfilepath" default="$(optenv FAST_LIVO_OUTPUT_DIR /results)" />
+  <arg name="republish_image" default="true" />
+  <arg name="config" default="$(find fast_livo_ros1)/config/HH-LVGO.yaml" />
+  <arg name="camera" default="$(find fast_livo_ros1)/config/camera_HH-LVGO-01.yaml" />
+  <rosparam command="load" file="$(arg config)" />
+  <node pkg="fast_livo_ros1" type="fastlivo_mapping" name="laserMapping" output="screen" required="true">
+    <rosparam file="$(arg camera)" />
+    <param name="outputfilepath" value="$(arg outputfilepath)" />
+  </node>
+  <node if="$(arg foxglove)" pkg="foxglove_bridge" type="foxglove_bridge" name="foxglove_bridge" output="screen">
+    <param name="address" value="0.0.0.0" />
+    <param name="port" value="$(arg foxglove_port)" />
+  </node>
+  <node if="$(arg republish_image)" pkg="image_transport" type="republish" name="republish"
+        args="compressed in:=/left_camera/image raw out:=/left_camera/image" output="screen" respawn="true" />
+</launch>

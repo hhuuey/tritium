@@ -1,0 +1,29 @@
+qfile_uris:
+  - /debug/AA-raw/cnhkgjgj-tug-4-2026-10-14T133300.000Z-2026-10-14T134800.000Z
+  - /debug/jk-mini-dataset-raw/cnwxijk-qthd-58-2026-07-29T101300.000Z-2026-07-29T101700.000Z
+  - /debug/jk-mini-dataset-raw/cnwxijk-qthd-58-2026-07-29T111600.000Z-2026-07-29T112500.000Z
+  - /debug/jk-mini-dataset-raw/cnwxijk-qthd-44-2026-07-30T115100.000Z-2026-07-30T115500.000Z
+  # - /debug/jk-mini-dataset-raw/cnwxijk-qthd-58-2026-07-30T085600.000Z-2026-07-30T085900.000Z
+  # - /debug/jk-mini-dataset-raw/cnwxijk-qthd-44-2026-07-30T123100.000Z-2026-07-30T123500.000Z
+  # - /debug/jk-mini-dataset-raw/cnwxijk-qthd-58-2026-07-30T085100.000Z-2026-07-30T085300.000Z
+  # - /debug/jk-mini-dataset-raw/cnwxijk-qthd-58-2026-07-30T072200.000Z-2026-07-30T072600.000Z
+# 模型路径均相对此本地资源根目录；登记时不读取或复制模型文件。
+data_engineering_resource: /debug/data_engineering_resource
+segmentation_model:
+  model_uri: segmentation_resource/sam3.pt
+  model_version: v1.0
+  source: raw
+vector_model:
+  model_uri: vector_map_resource/model.ckpt
+  model_version: v1.0
+  source: raw
+# 当前矢量入口是成功占位，不读取上述 vector_model 文件。
+sensor_calibration_models:
+  depth_engine:
+    model_uri: calibration_resource/dav2_orin_518x644_fp16.engine
+    model_version: depth-anything2-metric-v1
+    source: raw
+  vocabulary:
+    model_uri: calibration_resource/ORBvoc.bin
+    model_version: orb-vocabulary-v1
+    source: raw

@@ -1,0 +1,83 @@
+[project]
+name = "dagster-pipeline"
+# NumPy 1.26 supports Python 3.9–3.12. Do not build it against newer interpreters.
+requires-python = ">=3.10,<3.13"
+version = "1.0.0"
+dependencies = [
+    "dagster==1.13.24",
+    "dagster-pipes==1.13.24",
+    "filelock>=3.16",
+    "hydra-core==1.3.7",
+    "jsonschema>=4.23,<5",
+    "matplotlib>=3.9,<4",
+    "numpy>=1.26,<2",
+    "opencv-python-headless>=4.10",
+    "pillow>=10.0",
+    "pypng>=0.20220715.0",
+    "pyyaml>=6.0",
+    "sam3",
+    "scipy>=1.14,<2",
+]
+
+[tool.uv]
+cache-keys = [
+    { file = "pyproject.toml" },
+    { dir = "src" },
+]
+
+[tool.uv.sources]
+sam3 = { path = "src/algorithm/segmentation/sam3", editable = true }
+
+[project.scripts]
+dagster-pipeline = "dagster_pipeline.cli:main"
+
+[dependency-groups]
+dev = [
+    "dagster-dg-cli",
+    "dagster-webserver",
+    "pytest>=8.3",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+dev-mode-dirs = ["src", "src/protocol/python"]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/protocol/python/asset_protocol",
+    "src/dagster_pipeline",
+    "src/algorithm",
+]
+
+[tool.hatch.build.targets.wheel.sources]
+"src/algorithm" = "algorithm"
+"src/dagster_pipeline" = "dagster_pipeline"
+"src/protocol/python/asset_protocol" = "asset_protocol"
+
+[tool.hatch.build.targets.wheel.force-include]
+"pyproject.toml" = "pyproject.toml"
+"config" = "dagster_pipeline/config"
+"src/protocol/cpp/asset_protocol" = "asset_protocol/_cpp"
+"src/protocol/README.md" = "asset_protocol/_protocol_resources/README.md"
+"src/protocol/examples" = "asset_protocol/_protocol_resources/examples"
+"src/protocol/schema" = "asset_protocol/_protocol_resources/schema"
+"src/protocol/fixtures" = "asset_protocol/_protocol_resources/fixtures"
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+    "src/algorithm/ingestion/nuscenes_dataset/tests",
+]
+
+[tool.dg]
+directory_type = "project"
+
+[tool.dg.project]
+root_module = "dagster_pipeline"
+code_location_name = "dagster_pipeline.definitions:defs"
+registry_modules = [
+    "dagster_pipeline.components.*",
+]

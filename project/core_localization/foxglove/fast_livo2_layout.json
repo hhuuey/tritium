@@ -1,0 +1,111 @@
+{
+  "configById": {
+    "3D!fastlivo": {
+      "followTf": "aft_mapped",
+      "followMode": "follow-position",
+      "scene": {
+        "transforms": { "visible": false }
+      },
+      "transforms": {},
+      "topics": {
+        "/cloud_registered": {
+          "visible": true,
+          "pointSize": 2,
+          "decayTime": 30,
+          "colorField": "intensity",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/path": {
+          "visible": true,
+          "lineWidth": 0.1,
+          "gradient": ["#00ff00ff", "#00ff00ff"]
+        },
+        "/aft_mapped_to_init": {
+          "visible": true,
+          "type": "arrow",
+          "arrowScale": [1, 0.15, 0.15],
+          "color": "#ff3030ff"
+        },
+        "/gps/odometry": {
+          "visible": true,
+          "type": "arrow",
+          "arrowScale": [0.6, 0.1, 0.1],
+          "color": "#30a0ffff"
+        }
+      },
+      "layers": {
+        "grid": {
+          "layerId": "foxglove.Grid",
+          "instanceId": "grid",
+          "visible": true,
+          "frameLocked": true,
+          "label": "Grid",
+          "size": 100,
+          "divisions": 20,
+          "lineWidth": 1,
+          "color": "#248eff40",
+          "position": [0, 0, 0],
+          "rotation": [0, 0, 0]
+        }
+      },
+      "cameraState": {
+        "distance": 40,
+        "perspective": true,
+        "phi": 50,
+        "thetaOffset": 45,
+        "targetOffset": [0, 0, 0],
+        "target": [0, 0, 0],
+        "targetOrientation": [0, 0, 0, 1],
+        "fovy": 45,
+        "near": 0.5,
+        "far": 5000
+      },
+      "publish": { "type": "point" },
+      "imageMode": {}
+    },
+    "Image!camera": {
+      "imageMode": { "imageTopic": "/left_camera/image/compressed" },
+      "cameraState": {
+        "distance": 20,
+        "perspective": true,
+        "phi": 60,
+        "thetaOffset": 45,
+        "targetOffset": [0, 0, 0],
+        "target": [0, 0, 0],
+        "targetOrientation": [0, 0, 0, 1],
+        "fovy": 45,
+        "near": 0.5,
+        "far": 5000
+      },
+      "followMode": "follow-pose",
+      "scene": {},
+      "transforms": {},
+      "topics": {},
+      "layers": {},
+      "publish": { "type": "point" }
+    },
+    "RawMessages!odom": {
+      "topicPath": "/aft_mapped_to_init.pose.pose.position",
+      "diffEnabled": false,
+      "diffMethod": "custom",
+      "diffTopicPath": "",
+      "showFullMessageForDiff": false,
+      "expansion": "all"
+    }
+  },
+  "globalVariables": {},
+  "userNodes": {},
+  "playbackConfig": { "speed": 1 },
+  "layout": {
+    "direction": "row",
+    "first": "3D!fastlivo",
+    "second": {
+      "direction": "column",
+      "first": "Image!camera",
+      "second": "RawMessages!odom",
+      "splitPercentage": 60
+    },
+    "splitPercentage": 70
+  }
+}
